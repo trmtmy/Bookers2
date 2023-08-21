@@ -1,0 +1,27 @@
+<!--本投稿詳細-->
+
+<!--部分テンプレ-->
+<%= render 'devise/shared/left', {user: @user, book: @book} %>
+
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<!--一覧-->
+
+<h1>Books</h1>
+<table>
+  <tr>
+  <th>title</th>
+  <th>opinion</th>
+  </tr>
+
+<% @books.each do |books| %>
+<div>
+    <td><%= image_tag books.user.get_profile_image(100,100) %></td>
+    <td><%= link_to books.title, book_path(books.id) %></td>
+    <td><%= books.body %></td>
+</div>
+</table>
+
+<% end %>
