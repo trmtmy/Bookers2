@@ -8,20 +8,28 @@
 </div>
 
 <!--一覧-->
+<div class = "col-md-8 offset-md-1">
 
 <h1>Books</h1>
-<table>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+      <th></th>
+      <th>title</th>
+      <th>opinion</th>
+      <th colspan="3"></th>
+      </tr>
+    </thead>
+<tbody>
   <tr>
-  <th>title</th>
-  <th>opinion</th>
-  </tr>
-
 <% @books.each do |books| %>
 <div>
     <td><%= image_tag books.user.get_profile_image(100,100) %></td>
     <td><%= link_to books.title, book_path(books.id) %></td>
     <td><%= books.body %></td>
 </div>
-</table>
-
+  </tr>
+</tbody>
 <% end %>
+</table>
+</div>

@@ -17,13 +17,14 @@ class UsersController < ApplicationController
       flash[:notice] = "You have updated user successfully."
     redirect_to user_path(@user)
     else
-      @user = User.find(params[:id])
       render :edit
     end
   end
 
   def index
-    @user = User.all
+    @users = User.all
+    @user = current_user
+    @book = Book.new
   end
 
   private
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
   def is_matching_login_user
     user = User.find(params[:id])
     unless user.id == current_user.id
-      redirect_to post_images_path
+      redirect_to user_path
     end
   end
 end
