@@ -3,20 +3,19 @@
 
 <%= render 'devise/shared/left', {user: @user, book: @book} %>
 
-<div class = "col-md-8 offset-md-1">
+    <div class ="col-md-8 offset-md-1">
 
 <h3>Book detail</h3>
   <table class="table table-striped">
-    <tbody>
-<tr>
-    <td><%= image_tag @book_detail.user.get_profile_image(100,100) %><br>
-    <%= link_to @user.name, user_path(@user.id) %></td>
-    <td><%= link_to @book_detail.title, book_path(@book_detail.id) %></td>
-    <td><%= @book_detail.body %></td>
-    <td><%= link_to "Edit", edit_book_path(@book_detail), class: "btn btn-success" %></td>
-    <td><%= link_to "Destroy", book_path(@book_detail), method: :delete, "data-confirm" => "本当に消しますか？" , class: "btn btn-danger"%></td>
-
-</tr>
-
-</body>
-    </table>
+      <tr>
+        <td><%= image_tag @book_detail.user.get_profile_image(100,100) %><br>
+        <%= link_to @user.name, user_path(@user.id) %></td>
+        <td><%= link_to @book_detail.title, book_path(@book_detail.id) %></td>
+        <td><%= @book_detail.body %></td>
+        <% if current_user == @user %>
+        <td><%= link_to "Edit", edit_book_path(@book_detail), class: "btn btn-success" %></td>
+        <td><%= link_to "Destroy", book_path(@book_detail), method: :delete, "data-confirm" => "本当に消しますか？" , class: "btn btn-danger"%></td>
+        <% end %>
+      </tr>
+  </table>
+    </div>

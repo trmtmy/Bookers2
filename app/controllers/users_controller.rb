@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+    before_action :move_to_signed_in
     before_action :is_matching_login_user, only: [:edit, :update]
+    before_action :authenticate_user!
+
 
   def show
     @user = User.find(params[:id])
@@ -30,13 +33,20 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :profile_image)
+    params.require(:user).permit(:name, :profile_image, :introduction)
   end
 
   def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id
-      redirect_to user_path
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to user_path(current_user)
     end
   end
+  def move_to_signed_in
+    unless user_signed_in?
+      #サインインしていないユーザーはログインページが表示される
+      redirect_to  '/users/sign_in'
+    end
+  end
+
 end

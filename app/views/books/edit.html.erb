@@ -1,21 +1,38 @@
 <!--本の情報変更-->
+
+<div class ="container">
+<div class ="row">
+<div class ="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+    <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+<% end %>
+
 <h1>Editing Book</h1>
   <div>
     <%= form_with model: @book do |f| %>
       <div>
-      <label for="inputName">Name</label>
+      <label for="inputName">Title</label>
       </div>
-    <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"name"%>
+    <%= f.text_field :title, autofocus: true, id:"inputName", placeholder:"name"%>
+  <div>
+  <p>Opinion</p>
+  <%= f.text_area :body %>
   </div>
   <div>
-  <p>introduction</p>
-  <%= f.text_area :introduction %>
-  </div>
-  <div>
-  <%= f.submit "Update Book" %>
+    <%= f.submit "Update Book", class: "btn btn-success" %>
   </div>
 <% end %>
+</div>
 
-  <%= link_to "Show", user_path(current_user.id) %>
+  <%= link_to "Show", book_path(@book.id) %>
   <span>|</span>
-  <%= link_to "Back", user_path(current_user.id) %>
+  <%= link_to "Back", books_path %>
+  </div>
+  </div>
+  </div>
